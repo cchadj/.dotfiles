@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# I make get a warning 
+# BUG in find_stowed_path? Absolute/relative mismatch between Stow dir dotfiles.
+# I believe it can be safely ignored:
+# https://github.com/aspiers/stow/issues/65
+
 # make sure we have pulled in and updated any submodules
 git submodule init
 git submodule update
@@ -13,6 +18,7 @@ base=(
 useronly=(
     git
     vim
+    tmux
     zsh
     dot-config
 )
