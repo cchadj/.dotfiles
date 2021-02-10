@@ -1,3 +1,5 @@
 [user]
 	email = chadjiminas.chrysostomos@gmail.com
 	name = Chrysostomos Chadjiminas
+[pager]
+	branch = false

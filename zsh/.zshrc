@@ -1,8 +1,12 @@
+bindkey "^R" history-incremental-pattern-search-backward
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/ithil/.oh-my-zsh"
+
+# export Xming display for matplotlib and stuff
+export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -21,7 +25,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -72,6 +76,7 @@ plugins=(
   git
   docker
   jsontools
+  history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -165,4 +170,3 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 precmd_functions+=(_fix_cursor)
-# >>> vim bindings >>>

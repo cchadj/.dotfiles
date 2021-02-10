@@ -1,5 +1,8 @@
 " >>> coc.nvim >>>
 
+" extensions
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-snippets', 'coc-tsserver', 'coc-html', 'coc-jedi']
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -35,11 +38,11 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-inoremap <silent><expr> <C-j>
+inoremap <silent><expr> <Down>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -87,6 +90,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -148,7 +152,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -167,7 +171,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-" coc-snippets
+
+" >>> coc-snippets >>>
 " Use :CocList snippets to open snippets list.
 " Use :CocCommand snippets.editSnippets to edit user snippet of current filetype.
 " Use :CocCommand snippets.openSnippetFiles to open snippet files of current filetype.
@@ -188,4 +193,7 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " Use <leader>x for convert visual selected code to snippet
 xmap <leader>x  <Plug>(coc-convert-snippet)
-"<<<
+
+" >>> html >>>
+" <<< html <<<
+"<<< coc-snippets <<<
