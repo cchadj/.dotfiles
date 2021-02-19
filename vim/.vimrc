@@ -17,8 +17,21 @@ set number
 set mouse=a
 
 set laststatus=2
-
 let mapleader = ","
+
+
+" >>> 
+" yanked vim text goes to windows system clipboard 
+let s:clip = '/mnt/c/Windows/System32/clip.exe' 
+if executable(s:clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+    augroup END
+end
+" copied text from windows can be pased  with "+p
+noremap "+p :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+" <<<
 
 " >>> Insert and Normal View cursor >>>
 augroup myCmds
@@ -26,7 +39,6 @@ augroup myCmds
   autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 " <<< Insert and Normal View cursor <<<
-
 
 " >>> PLUGINS >>>
 " install vim-plug if it doesn't already exist
@@ -115,8 +127,8 @@ call plug#end()
 
 
 " >>> PYTHON HOSTING >>>
-let g:python_host_prog="/home/ithil/anaconda3/envs/py27/bin/python"
-let g:python3_host_prog="/home/ithil/anaconda3/envs/py38/bin/python"
+let g:python_host_prog="/home/tom/anaconda3/envs/py27/bin/python"
+let g:python3_host_prog="/home/tom/anaconda3/envs/py38/bin/python"
 " <<< PYTHON HOSTING <<<
 
 
