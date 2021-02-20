@@ -1,6 +1,17 @@
-bindkey "^R" history-incremental-pattern-search-backward
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+bindkey "^R" history-incremental-pattern-search-backward
+
+# stop annoying beep sound
+unsetopt beep
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/ithil/.oh-my-zsh"
@@ -12,7 +23,7 @@ export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -121,7 +132,6 @@ zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 # ```
 
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/ithil/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -137,15 +147,7 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export PYENV_ROOT="$HOME/.config/pyenv"
-# >>> pyenv >>>
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-# <<< pyenv <<<<
-
-# <<< bind vim keybinding for shell <<<
+# >>> bind vim keybinding for shell >>>
 bindkey -v
 export KEYTIMEOUT=1
 # cursor changes depending of mode
@@ -170,3 +172,7 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 precmd_functions+=(_fix_cursor)
+# <<< bind vim keybinding for shell >>>
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
